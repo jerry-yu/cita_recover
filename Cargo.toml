@@ -1,0 +1,10 @@
+[package]
+name = "cita_recover"
+version = "0.1.0"
+authors = ["yubo <yubo@cryptape.com>"]
+
+[dependencies]
+clap = "2.32.0"
+log = "0.4.6"
+rocksdb = { git = "https://github.com/paritytech/rust-rocksdb" }
+ethereum-types = "0.4.0"
