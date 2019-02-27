@@ -1,13 +1,14 @@
 extern crate clap;
-extern crate rocksdb;
-extern crate ethereum-types;
+extern crate kvdb_rocksdb;
+extern crate ethereum_types;
+use rlp::{decode, encode, Decodable, Encodable};
 #[macro_use]
 extern crate log;
+extern common_types as types;
 
 use clap::App;
-use rocksdb::{DB};
-use ethereum::{H256};
-
+use kvdb_rocksdb::{Database, DatabaseConfig};
+use ethereum_types::{H256};
 
 fn fix_bft() {
 unimplemented!();
@@ -36,20 +37,18 @@ pub const NUM_COLUMNS: Option<u32> = Some(7);
 
 pub struct CurrentHash;
 
-impl Key<H256> for CurrentHash {
+/*impl Key<H256> for CurrentHash {
     type Target = H256;
 
     fn key(&self) -> H256 {
         H256::from("7cabfb7709b29c16d9e876e876c9988d03f9c3414e1d3ff77ec1de2d0ee59f66")
     }
-}
-
+}*/
 
 fn main() {
 
     let matches = App::new("cita-recover")
-        .version(get_build_info_str(true))
-        .long_version(get_build_info_str(false))
+        //.version(get_build_info_str(true))
         .author("yubo")
         .about("CITA Block Chain Node powered by Rust")
         .args_from_usage("-h, --height=[NUMBER] 'Sets the destinate height'")
@@ -57,10 +56,13 @@ fn main() {
         .get_matches();
 
     let data_path = matches.value_of("data").unwrap_or("./data");
+    let chash = H256::from("7cabfb7709b29c16d9e876e876c9988d03f9c3414e1d3ff77ec1de2d0ee59f66");
+    let cheight = H256::from("7cabfb7709b29c16d9e876e876c9988d03f9c3414e1d3ff77ec1de2d0ee59f68");
 
-    let mut db = DB::open_default(data_path);
-    match db.get(b"7cabfb7709b29c16d9e876e876c9988d03f9c3414e1d3ff77ec1de2d0ee59f66") {
-        Ok(Some(value)) => println!("retrieved value {}", value.to_utf8().unwrap()),
+    let database_config = DatabaseConfig::with_columns(NUM_COLUMNS);
+    let mut db = Database::open(&database_config,data_path).expect("DB file not found");
+    match db.get(COL_EXTRA,&cheight) {
+        Ok(Some(value)) => println!("retrieved value {:?}", value),
         Ok(None) => println!("value not found"),
         Err(e) => println!("operational problem encountered: {}", e),
     }
