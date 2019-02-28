@@ -6,6 +6,8 @@ authors = ["yubo <yubo@cryptape.com>"]
 [dependencies]
 clap = "2.32.0"
 log = "0.4.6"
-kvdb-rocksdb = { version = "0.1.4", optional = true }
-ethereum-types = "0.4.0"
+cita-types = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
 common-types = { path = "./types" }
+proof = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
+db = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
+rlp = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
