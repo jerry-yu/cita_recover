@@ -11,3 +11,4 @@ common-types = { path = "./types" }
 proof = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
 db = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
 rlp = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
+libproto = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
