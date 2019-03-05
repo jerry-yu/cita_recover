@@ -42,7 +42,6 @@ fn delete_higher_log_file(data_path: &str, height: usize) {
                 // Here, `entry` is a `DirEntry`.
                 if let Ok(fname) = entry.file_name().into_string() {
                     let vec_str: Vec<&str> = fname.split(".log").collect();
-                    println!("wal_path fname {:?}", vec_str);
                     if !vec_str.is_empty() {
                         let hi = vec_str[0].parse::<usize>().unwrap_or(0);
                         if hi > height {
@@ -239,7 +238,7 @@ fn fix_chain_db(data_path: &str, dst_height: u64) -> bool {
     }
 
     chain_db.write(batch).unwrap();
-    println!("header is {:?}", dst_header);
+    //println!("header is {:?}", dst_header);
     println!("dst_hash is {:?}", dst_hash);
     true
 }
