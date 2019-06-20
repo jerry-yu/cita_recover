@@ -168,7 +168,7 @@ fn fix_chain_db(data_path: &str, dst_height: u64) -> bool {
     let database_config = DatabaseConfig::with_columns(db::NUM_COLUMNS);
     let chain_db = Database::open(&database_config, &*chain_path).expect("DB file not found");
 
-    let hash: H256 = chain_db
+/*    let hash: H256 = chain_db
         .read(db::COL_EXTRA, &extras::CurrentHash)
         .expect("CurrentHash value not found");;
     let hi: BlockNumber = chain_db
@@ -182,7 +182,7 @@ fn fix_chain_db(data_path: &str, dst_height: u64) -> bool {
         );
         return false;
     }
-
+*/
     let dst_header: Header = chain_db
         .read(db::COL_HEADERS, &dst_height)
         .expect("Dst header value not found");
