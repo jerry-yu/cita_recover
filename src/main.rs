@@ -276,10 +276,13 @@ fn main() {
     let _ = fix_wal_index(data_path, dst_height as usize);
 
     if !fix_chain_db(data_path, dst_height) {
+        println!("Not Success in chain db");
         return;
     }
 
     if !fix_executor_db(data_path, dst_height) {
+        println!("Not Success in executor db");
         return;
     }
+    println!("Done");
 }
