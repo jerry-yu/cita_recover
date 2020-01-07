@@ -1,15 +1,15 @@
 [package]
 name = "cita_recover"
 version = "0.1.0"
-authors = ["yubo <yubo@cryptape.com>"]
+authors = ["yubo <yubo@citahub.com>"]
 
 [dependencies]
 clap = "2.32.0"
 log = "0.4.6"
 bincode = "0.8.0"
-cita-types = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
+cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
 common-types = { path = "./types" }
-proof = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
-db = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
-rlp = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
-libproto = { git = "https://github.com/cryptape/cita-common.git", branch = "develop" }
+proof = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
+db = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
+rlp = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
+libproto = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
