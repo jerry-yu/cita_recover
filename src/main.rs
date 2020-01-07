@@ -1,16 +1,22 @@
 extern crate bincode;
-extern crate cita_types;
+//extern crate cita_types;
 extern crate clap;
 extern crate common_types as types;
-extern crate db as cita_db;
-extern crate libproto;
+//extern crate db as cita_db;
+//extern crate libproto;
 extern crate log;
-extern crate proof;
-extern crate rlp;
+//extern crate proof;
+//extern crate rlp;
 
-use cita_db::{DBTransaction, Database, DatabaseConfig};
+use types::libproto;
+use types::proof;
+//use types::db as cita_db;
+use types::cita_types;
+use types::rlp;
+
 use cita_types::H256;
 use clap::App;
+use types::cita_db::{DBTransaction, Database, DatabaseConfig};
 /*use libproto::blockchain::{
     AccountGasLimit as ProtoAccountGasLimit, Proof as ProtoProof, ProofType,
 };
@@ -126,22 +132,23 @@ fn fix_executor_db(data_path: &str, dst_height: u64) -> bool {
 
     let hash: H256 = exec_db
         .read(db::COL_EXTRA, &extras::CurrentHash)
-        .expect("CurrentHash value not found");;
+        .expect("CurrentHash value not found");
     let hdr: Header = exec_db
         .read(db::COL_HEADERS, &hash)
         .expect("CurrentHeader value not found");
 
     if hdr.number() < dst_height {
         println!(
-            " exec Dst height greater then current hight {}. Think about it",
+            "WARN exec Dst height greater then current hight {}. Think about it",
             hdr.number()
         );
-        return false;
+        // this check should be done
+        //return false;
     }
 
     let dst_hash: H256 = exec_db
         .read(db::COL_EXTRA, &dst_height)
-        .expect("Dst Hash value not found");;
+        .expect("Dst Hash value not found");
 
     let dst_header: Option<Header> = exec_db.read(db::COL_HEADERS, &dst_hash);
 
@@ -168,21 +175,21 @@ fn fix_chain_db(data_path: &str, dst_height: u64) -> bool {
     let database_config = DatabaseConfig::with_columns(db::NUM_COLUMNS);
     let chain_db = Database::open(&database_config, &*chain_path).expect("DB file not found");
 
-/*    let hash: H256 = chain_db
-        .read(db::COL_EXTRA, &extras::CurrentHash)
-        .expect("CurrentHash value not found");;
-    let hi: BlockNumber = chain_db
-        .read(db::COL_EXTRA, &hash)
-        .expect("CurrentHeight value not found");
+    /*    let hash: H256 = chain_db
+            .read(db::COL_EXTRA, &extras::CurrentHash)
+            .expect("CurrentHash value not found");
+        let hi: BlockNumber = chain_db
+            .read(db::COL_EXTRA, &hash)
+            .expect("CurrentHeight value not found");
 
-    if hi < dst_height {
-        println!(
-            " Dst height greater then current hight {}. Think about it",
-            hi
-        );
-        return false;
-    }
-*/
+        if hi < dst_height {
+            println!(
+                " Dst height greater then current hight {}. Think about it",
+                hi
+            );
+            return false;
+        }
+    */
     let dst_header: Header = chain_db
         .read(db::COL_HEADERS, &dst_height)
         .expect("Dst header value not found");

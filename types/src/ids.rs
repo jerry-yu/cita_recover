@@ -16,9 +16,9 @@
 
 //! Unique identifiers.
 
+use crate::BlockNumber;
 use cita_types::H256;
-use jsonrpc_types::rpctypes::{BlockNumber as RpcBlockNumber, BlockTag};
-use BlockNumber;
+use jsonrpc_types::rpc_types::{BlockNumber as RpcBlockNumber, BlockTag};
 
 /// Uniquely identifies block.
 #[derive(Debug, PartialEq, Copy, Clone, Hash, Eq)]

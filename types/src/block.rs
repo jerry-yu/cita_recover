@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-use header::{Header, OpenHeader};
+use crate::header::{Header, OpenHeader};
 
+use crate::extras::TransactionAddress;
 use cita_types::H256;
-use extras::TransactionAddress;
 use std::collections::HashMap;
 
 use libproto::blockchain::{
@@ -27,7 +27,7 @@ use libproto::blockchain::{
 use rlp::*;
 use std::ops::{Deref, DerefMut};
 
-use transaction::SignedTransaction;
+use crate::transaction::SignedTransaction;
 use util::HeapSizeOf;
 
 #[derive(Default, Debug, Clone, PartialEq)]
@@ -193,8 +193,11 @@ impl BlockBody {
 
     pub fn protobuf(&self) -> ProtoBlockBody {
         let mut body = ProtoBlockBody::new();
-        let txs: Vec<ProtoSignedTransaction> =
-            self.transactions.iter().map(|t| t.protobuf()).collect();
+        let txs: Vec<ProtoSignedTransaction> = self
+            .transactions
+            .iter()
+            .map(SignedTransaction::protobuf)
+            .collect();
         body.set_transactions(txs.into());
         body
     }

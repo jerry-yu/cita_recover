@@ -2,27 +2,29 @@
 name = "common-types"
 description = "Common types used throughout the codebase"
 version = "0.1.0"
-authors = ["Cryptape Technologies <contact@citahub.com>"]
+authors = ["Cryptape Technologies <contact@cryptape.com>"]
+edition = "2018"
 
 [dependencies]
-rlp = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-rlp_derive = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-util = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-hashable = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-jsonrpc-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-cita-crypto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-libproto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+rlp = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+rlp_derive = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+util = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+cita-types = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+hashable = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+jsonrpc-types = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+cita-crypto = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+libproto = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
 serde = "1.0"
 serde_derive = "1.0"
 bloomchain = "0.2"
 lazy_static = "0.2"
 time = "0.1"
-proof = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-db = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+cita-logger = "0.1.0"
+proof = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
+db = { git = "https://github.com/cryptape/cita-common.git", rev = "6e6ac144" }
 
 [features]
-default = ["secp256k1", "sha3hash"]
+default = ["sm2", "sm3hash"]
 secp256k1 = ["cita-crypto/secp256k1", "libproto/secp256k1"]
 ed25519 = ["cita-crypto/ed25519", "libproto/ed25519"]
 sm2 = ["cita-crypto/sm2", "libproto/sm2"]

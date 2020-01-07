@@ -16,17 +16,17 @@
 
 //! Receipt
 
+use crate::log_entry::{LocalizedLogEntry, LogBloom, LogEntry};
+use crate::BlockNumber;
 use cita_types::traits::LowerHex;
 use cita_types::{Address, H256, U256};
-use jsonrpc_types::rpctypes::Receipt as RpcReceipt;
+use jsonrpc_types::rpc_types::Receipt as RpcReceipt;
 use libproto::executor::{
     Receipt as ProtoReceipt, ReceiptError as ProtoReceiptError, ReceiptErrorWithOption, StateRoot,
 };
-use log_entry::{LocalizedLogEntry, LogBloom, LogEntry};
 use rlp::*;
 use std::str::FromStr;
 use util::{Bytes, HeapSizeOf};
-use BlockNumber;
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, Copy, Eq)]
 pub enum ReceiptError {
@@ -254,12 +254,12 @@ impl From<ProtoReceipt> for Receipt {
 
         let logs = receipt
             .get_logs()
-            .into_iter()
+            .iter()
             .map(|log_entry| {
                 let address: Address = Address::from_slice(log_entry.get_address());
                 let topics: Vec<H256> = log_entry
                     .get_topics()
-                    .into_iter()
+                    .iter()
                     .map(|topic| H256::from_slice(topic))
                     .collect();
                 let data: Bytes = Bytes::from(log_entry.get_data());
@@ -377,7 +377,7 @@ impl Into<RpcReceipt> for LocalizedReceipt {
             logs: self.logs.into_iter().map(Into::into).collect(),
             state_root: self.state_root.map(Into::into),
             logs_bloom: self.log_bloom,
-            error_message: self.error.map(|error| error.description()),
+            error_message: self.error.map(ReceiptError::description),
         }
     }
 }
@@ -385,7 +385,7 @@ impl Into<RpcReceipt> for LocalizedReceipt {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use log_entry::LogEntry;
+    use crate::log_entry::LogEntry;
 
     #[test]
     fn test_no_state_root() {

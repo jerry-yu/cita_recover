@@ -7,9 +7,11 @@ authors = ["yubo <yubo@citahub.com>"]
 clap = "2.32.0"
 log = "0.4.6"
 bincode = "0.8.0"
-cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+#cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
 common-types = { path = "./types" }
-proof = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-db = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-rlp = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-libproto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+#proof = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+#db = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+#rlp = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+#libproto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+
+

@@ -1,5 +1,5 @@
 // CITA
-// Copyright 2016-2017 Cryptape Technologies LLC.
+// Copyright 2016-2019 Cryptape Technologies LLC.
 
 // This program is free software: you can redistribute it
 // and/or modify it under the terms of the GNU General Public
@@ -16,25 +16,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 extern crate cita_crypto as crypto;
-extern crate cita_types;
-extern crate hashable;
-extern crate jsonrpc_types;
-extern crate libproto;
-extern crate rlp;
 #[macro_use]
 extern crate rlp_derive;
 #[macro_use]
 extern crate serde_derive;
-extern crate util;
 #[macro_use]
 extern crate lazy_static;
-extern crate time;
 #[macro_use]
-extern crate logger;
-extern crate db as cita_db;
-extern crate proof;
+extern crate cita_logger as logger;
+pub extern crate db as cita_db;
 
 pub extern crate bloomchain;
+pub extern crate cita_types;
+pub extern crate libproto;
+pub extern crate proof;
+pub extern crate rlp;
 
 pub mod account_diff;
 pub mod basic_account;
