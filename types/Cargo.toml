@@ -5,22 +5,21 @@ version = "0.1.0"
 authors = ["Cryptape Technologies <contact@citahub.com>"]
 
 [dependencies]
-rlp = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-rlp_derive = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-util = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-hashable = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-jsonrpc-types = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-cita-crypto = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-libproto = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
+rlp = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+rlp_derive = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+util = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+hashable = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+jsonrpc-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+cita-crypto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+libproto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
 serde = "1.0"
 serde_derive = "1.0"
 bloomchain = "0.2"
 lazy_static = "0.2"
 time = "0.1"
-logger = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-proof = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
-db = { git = "https://github.com/citahub/cita-common.git", rev = "c3b60920" }
+proof = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
+db = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
 
 [features]
 default = ["secp256k1", "sha3hash"]
