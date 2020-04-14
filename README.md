@@ -23,3 +23,13 @@
 快照是在线修复，本程序是离线修复
 3. 亲测可用
 4. 编译使用rustc 1.40 stable 版本
+5. 默认编译出来的是SM2 国密版本，如果希望编译出SECP56版本，修改 types/Cargo.toml
+```
+[features]
+default = ["sm2", "sm3hash"]
+```
+修改为
+```
+[features]
+default = ["secp256k1 ", "sha3hash"]
+```
