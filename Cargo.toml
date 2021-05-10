@@ -2,16 +2,16 @@
 name = "cita_recover"
 version = "0.1.0"
 authors = ["yubo <yubo@citahub.com>"]
+edition = "2018"
 
 [dependencies]
 clap = "2.32.0"
 log = "0.4.6"
 bincode = "0.8.0"
-#cita-types = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-common-types = { path = "./types" }
-#proof = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-#db = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-#rlp = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-#libproto = { git = "https://github.com/citahub/cita-common.git", rev = "683d1f228" }
-
-
+cita-types = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
+common-types = { path = "./types",default-features=true }
+proof = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
+hashable = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
+rlp = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
+libproto = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
+cita-database = "0.1"
