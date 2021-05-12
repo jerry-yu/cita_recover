@@ -4,8 +4,7 @@ use clap;
 use common_types as types;
 
 use types::db_indexes::{
-    BlockNumber2Hash, BlockNumber2Header, CurrentHash, CurrentHeight, CurrentProof, DBIndex,
-    Hash2BlockNumber, Hash2Header,
+    BlockNumber2Hash, BlockNumber2Header, CurrentHash, CurrentProof, DBIndex, Hash2Header,
 };
 
 use cita_types::H256;
@@ -161,7 +160,7 @@ fn fix_executor_db(data_path: &str, dst_height: u64) -> bool {
     let _dst_header = exec_db
         .get(Some(DataCategory::Headers), &hash_header_key)
         .unwrap_or(None)
-        .map(|h| rlp::decode::<H256>(&h))
+        .map(|h| rlp::decode::<Header>(&h))
         .expect("dst header not get");
 
     exec_db
