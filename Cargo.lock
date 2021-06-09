@@ -66,6 +66,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "authority_manage"
+version = "0.1.0"
+source = "git+https://github.com/citahub/cita-common.git?branch=develop#5acb4259e4398403ede0faf2b464b15c66b87e8c"
+dependencies = [
+ "bincode",
+ "cita-types",
+]
+
+[[package]]
 name = "autocfg"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -373,8 +382,9 @@ dependencies = [
 
 [[package]]
 name = "cita_recover"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
+ "authority_manage",
  "bincode",
  "cita-database",
  "cita-types",
