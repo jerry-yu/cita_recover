@@ -1,0 +1,68 @@
+# Compiled files
+*.o
+*.so
+*.rlib
+*.dll
+*.pyc
+
+# Executables
+*.exe
+
+# intermedia file directory
+target/
+*/target/
+tmp*/
+
+# Cargo lock in subs
+**/Cargo.lock
+
+
+# editor specific
+# vim stuff
+*.swp
+# emacs stuff
+*~
+# vscode
+.vscode
+# jetbrains ide stuff
+.idea
+*.iml
+# mac stuff
+.DS_Store
+
+# gdb files
+.gdb_history
+
+# ctags
+TAGS
+
+# sphinx
+docs/build
+
+# vagrant file
+.vagrant
+
+# node
+**/node_modules
+yarn-error.log
+
+# docs
+docs/site
+
+# localtime for macos users
+localtime
+
+# test data
+**/test-rocksdb
+
+# log files
+logs/
+
+# private key
+*_privkey
+
+# pem file
+*.pem
+
+# db file
+*.db
