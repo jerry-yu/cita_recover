@@ -5,7 +5,7 @@ use types::db_indexes::{
 
 use authority_manage::AuthorityManage;
 use cita_types::{Address, H256};
-use clap::App;
+use clap::{Arg, Command};
 
 use cita_database::{Config, DataCategory, Database, RocksDB, NUM_COLUMNS};
 
@@ -20,8 +20,9 @@ use types::header::*;
 // use types::{db, extras, BlockNumber};
 
 use bincode::{serialize, Infinite};
+use fs_extra::{copy_items, dir};
 use proof::BftProof;
-use std::fs::{read_dir, remove_file, OpenOptions};
+use std::fs::{read_dir, remove_dir_all, remove_file, OpenOptions};
 use std::io::{self, Read, Seek, Write};
 use std::mem::transmute;
 
@@ -273,21 +274,66 @@ fn fix_chain_db(data_path: &str, dst_height: u64) -> bool {
 }
 
 fn main() {
-    let matches = App::new("cita-recover")
+    let matches = Command::new("cita-recover")
         //.version(get_build_info_str(true))
         .author("yubo")
         .about("CITA Block Chain Node powered by Rust")
-        .args_from_usage("-h, --height=[NUMBER] 'Sets the destinate height'")
-        .args_from_usage("-d, --data=[PATH] 'Set data dir'")
+        .arg(
+            Arg::new("height")
+                .short('h')
+                .long("height")
+                .takes_value(true)
+                .help("Sets the destination height"),
+        )
+        .arg(
+            Arg::new("data_direction")
+                .short('d')
+                .long("data")
+                .takes_value(true)
+                .default_value("./data")
+                .help("Set data dir"),
+        )
+        .subcommand(
+            Command::new("full_mode_recover")
+                .about("recover full mode node from state snapshot")
+                .arg(
+                    Arg::new("height")
+                        .short('h')
+                        .long("height")
+                        .takes_value(true)
+                        .help("Sets the destination height to recover"),
+                )
+                .arg(
+                    Arg::new("backup_direction")
+                        .short('b')
+                        .long("backup")
+                        .takes_value(true)
+                        .default_value("./backup")
+                        .help("Sets the snapshot backup direction"),
+                )
+                .arg(
+                    Arg::new("data_direction")
+                        .short('d')
+                        .long("data")
+                        .takes_value(true)
+                        .default_value("./data")
+                        .help("Set data dir"),
+                ),
+        )
         .get_matches();
 
-    let data_path = matches.value_of("data").unwrap_or("./data");
-    let dst_height = matches
-        .value_of("height")
-        .unwrap_or("0")
-        .to_string()
-        .parse::<u64>()
-        .unwrap_or(0);
+    let (data_path, dst_height) =
+        if let Some(args) = matches.subcommand_matches("full_mode_recover") {
+            (
+                args.value_of("data_direction").unwrap(),
+                args.value_of("height").unwrap().parse::<u64>().unwrap(),
+            )
+        } else {
+            (
+                matches.value_of("data_direction").unwrap(),
+                matches.value_of("height").unwrap().parse::<u64>().unwrap(),
+            )
+        };
 
     if dst_height == 0 {
         println!("height param must greater than 0");
@@ -302,9 +348,22 @@ fn main() {
         return;
     }
 
-    if !fix_executor_db(data_path, dst_height) {
-        println!("Not Success in executor db");
-        return;
+    if let Some(args) = matches.subcommand_matches("full_mode_recover") {
+        let backup_path = args.value_of("backup_direction").unwrap();
+        let snap_path = backup_path.to_string() + "/" + &dst_height.to_string();
+        let exec_path = data_path.to_string() + STATEDB;
+
+        let _ = remove_dir_all(&exec_path);
+        // create_dir_all(&exec_path).unwrap();
+        let mut copy_option = dir::CopyOptions::new();
+        copy_option.copy_inside = true;
+        copy_items(&[snap_path], exec_path, &copy_option).unwrap();
+    } else {
+        if !fix_executor_db(data_path, dst_height) {
+            println!("Not Success in executor db");
+            return;
+        }
     }
+
     println!("Done");
 }

@@ -5,7 +5,7 @@ authors = ["yubo <anhuitianyu@163.com>"]
 edition = "2018"
 
 [dependencies]
-clap = "2.32.0"
+clap = "3.0"
 log = "0.4.6"
 bincode = "0.8.0"
 cita-types = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
@@ -16,3 +16,4 @@ rlp = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
 libproto = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
 authority_manage = { git = "https://github.com/citahub/cita-common.git", branch = "develop" }
 cita-database = "0.1"
+fs_extra = "1.2.0"
